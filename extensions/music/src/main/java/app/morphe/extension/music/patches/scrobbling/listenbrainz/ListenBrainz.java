@@ -22,7 +22,7 @@ import app.morphe.extension.shared.requests.Requester;
 
 @SuppressWarnings("unused")
 public class ListenBrainz {
-    private static final String BASE_URL = "https://api.listenbrainz.org/";
+    private static final String DEFAULT_BASE_URL = "https://api.listenbrainz.org/";
     private static final String USER_AGENT = "Morphe/" + Utils.getPatchesReleaseVersion() + " (YTMusic/" + Utils.getAppVersionName() + ")";
     private static final String CLIENT_VERSION = Utils.getPatchesReleaseVersion();
     
@@ -41,7 +41,7 @@ public class ListenBrainz {
         if (token == null || token.isBlank()) {
             throw new IllegalArgumentException("User token is missing or blank");
         }
-        HttpURLConnection conn = Requester.openConnection(BASE_URL + "1/validate-token");
+        HttpURLConnection conn = Requester.openConnection(getBaseUrl() + "1/validate-token");
         conn.setRequestMethod("GET");
         conn.setRequestProperty("User-Agent", USER_AGENT);
         conn.setRequestProperty("Authorization", "Token " + token);
@@ -158,7 +158,7 @@ public class ListenBrainz {
         Utils.verifyOffMainThread();
         byte[] jsonBodyBytes = jsonBody.getBytes(StandardCharsets.UTF_8);
 
-        HttpURLConnection conn = Requester.openConnection(BASE_URL + path);
+        HttpURLConnection conn = Requester.openConnection(getBaseUrl() + path);
         conn.setRequestMethod("POST");
         conn.setRequestProperty("User-Agent", USER_AGENT);
         conn.setRequestProperty("Authorization", "Token " + token);
@@ -179,5 +179,16 @@ public class ListenBrainz {
         String errResponse = Requester.parseErrorStringAndDisconnect(conn);
         Logger.printException(() -> "ListenBrainz server returned code: " + code + ". Response: " + errResponse);
         return false;
+    }
+
+    private static String getBaseUrl() {
+        String baseUrl = Settings.LISTENBRAINZ_API_URL.get().trim();
+        if (baseUrl.isEmpty()) {
+            baseUrl = DEFAULT_BASE_URL;
+        }
+        if (!baseUrl.startsWith("http://") && !baseUrl.startsWith("https://")) {
+            throw new IllegalArgumentException("ListenBrainz API URL must use HTTP or HTTPS");
+        }
+        return baseUrl.endsWith("/") ? baseUrl : baseUrl + "/";
     }
 }

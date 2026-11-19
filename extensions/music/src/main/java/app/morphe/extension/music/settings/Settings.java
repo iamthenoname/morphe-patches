@@ -335,6 +335,7 @@ public class Settings extends SharedYouTubeSettings {
 
     // Scrobbling
     public static final BooleanSetting LISTENBRAINZ_SCROBBLING = new BooleanSetting("morphe_music_listenbrainz_enabled", FALSE, true);
+    public static final StringSetting LISTENBRAINZ_API_URL = new StringSetting("morphe_music_listenbrainz_api_url", "https://api.listenbrainz.org/", false, parent(LISTENBRAINZ_SCROBBLING));
     public static final StringSetting LISTENBRAINZ_USER_TOKEN = new StringSetting("morphe_music_listenbrainz_token", "", false, parent(LISTENBRAINZ_SCROBBLING));
     public static final BooleanSetting LISTENBRAINZ_NOW_PLAYING = new BooleanSetting("morphe_music_listenbrainz_now_playing", FALSE, true, parent(LISTENBRAINZ_SCROBBLING));
     public static final IntegerSetting LISTENBRAINZ_MIN_SONG_DURATION = new IntegerSetting("morphe_music_listenbrainz_min_song_duration", 30, true, parent(LISTENBRAINZ_SCROBBLING));

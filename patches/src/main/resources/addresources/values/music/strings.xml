@@ -537,6 +537,8 @@ SABR playback (Spoof video streams turned off)"</string>
     <string name="morphe_music_scrobbling_delay_seconds_title">Scrobble delay seconds</string>
     <!-- 'scrobble' must be kept untranslated -->
     <string name="morphe_music_scrobbling_delay_seconds_summary">Trigger scrobble after listening for this many seconds</string>
+    <string name="morphe_music_listenbrainz_api_url_title">ListenBrainz API URL</string>
+    <string name="morphe_music_listenbrainz_api_url_summary">Base URL for the ListenBrainz-compatible API. Leave empty to use the official ListenBrainz API</string>
     <string name="morphe_music_listenbrainz_token_title">ListenBrainz Account</string>
     <string name="morphe_music_listenbrainz_token_summary_logged_in">Logged in. Tap to manage account</string>
     <!-- 'scrobbling' must be kept untranslated -->

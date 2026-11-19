@@ -55,6 +55,7 @@ val scrobblingPatch = patch(
                         key = "morphe_music_listenbrainz_enabled",
                         titleKey = "morphe_music_scrobbling_enabled_title"
                     ),
+                    TextPreference("morphe_music_listenbrainz_api_url"),
                     NonInteractivePreference(
                         key = "morphe_music_listenbrainz_token",
                         titleKey = "morphe_music_listenbrainz_token_title",
